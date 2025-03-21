@@ -78,14 +78,14 @@ node_settings:
     images:
       beaconkit: beacond:kurtosis-local
     config:
-      timeout_propose: 0.5s
-      timeout_prevote: 0.3s
-      timeout_precommit: 0.3s
-      timeout_commit: 0.3s
+      timeout_propose: 2s
+      timeout_prevote: 2s
+      timeout_precommit: 2s
+      timeout_commit: 500ms
       max_num_inbound_peers: 40
       max_num_outbound_peers: 10
     app:
-      payload_timeout: 0.5s
+      payload_timeout: 850ms
       enable_optimistic_payload_builds: true
   execution_settings:
     specs:
