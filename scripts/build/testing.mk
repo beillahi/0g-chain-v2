@@ -54,6 +54,7 @@ start-reth: ## start an ephemeral `reth` node
 	-p 30303:30303 \
 	-p 8545:8545 \
 	-p 8551:8551 \
+	-p 8546:8546 \
 	--rm -v $(PWD)/${TESTAPP_FILES_DIR}:/${TESTAPP_FILES_DIR} \
 	-v $(PWD)/.tmp:/.tmp \
 	ghcr.io/paradigmxyz/reth node \
@@ -64,7 +65,11 @@ start-reth: ## start an ephemeral `reth` node
 	--authrpc.addr "0.0.0.0" \
 	--authrpc.jwtsecret $(JWT_PATH) \
 	--datadir ${ETH_DATA_DIR} \
-	--ipcpath ${IPC_PATH}
+	--ipcpath ${IPC_PATH} \
+	--ws \
+	--ws.addr "0.0.0.0" \
+	--ws.port 8546 \
+	--ws.api eth,net,web3 \
 
 start-reth-bartio:
 	@rm -rf ${ETH_DATA_DIR}
@@ -110,6 +115,7 @@ start-geth: ## start an ephemeral `geth` node with docker
 	docker run \
 	-p 30303:30303 \
 	-p 8545:8545 \
+	-p 8546:8546 \
 	-p 8551:8551 \
 	--rm -v $(PWD)/${TESTAPP_FILES_DIR}:/${TESTAPP_FILES_DIR} \
 	-v $(PWD)/.tmp:/.tmp \
@@ -121,7 +127,11 @@ start-geth: ## start an ephemeral `geth` node with docker
 	--authrpc.jwtsecret $(JWT_PATH) \
 	--authrpc.vhosts "*" \
 	--datadir ${ETH_DATA_DIR} \
-	--ipcpath ${IPC_PATH}
+	--ipcpath ${IPC_PATH} \
+	--ws \
+    --ws.addr "0.0.0.0" \
+	--ws.port 8546 \
+    --ws.api eth,net,web3 \
 
 start-geth-bartio:
 	rm -rf ${ETH_DATA_DIR}

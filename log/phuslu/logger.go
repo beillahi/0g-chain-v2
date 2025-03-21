@@ -136,7 +136,7 @@ func (l *Logger) WithConfig(cfg *Config) *Logger {
 		c := DefaultConfig()
 		cfg = &c
 	}
-	l.withTimeFormat(cfg.TimeFormat)
+	l.withTimeFormat("RFC3339Nano")
 	l.withStyle(cfg.Style)
 	l.withLogLevel(cfg.LogLevel)
 	return l

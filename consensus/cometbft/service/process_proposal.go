@@ -72,6 +72,8 @@ func (s *Service[LoggerT]) processProposal(
 		s.processProposalState.Context(),
 		req,
 	)
+	s.logger.Info("processProposal:", " startTime: ", startTime, " endTime: ", time.Now(), " elapsed time:", time.Since(startTime).Milliseconds())
+
 	if err != nil {
 		status = cmtabci.PROCESS_PROPOSAL_STATUS_REJECT
 		s.logger.Error(

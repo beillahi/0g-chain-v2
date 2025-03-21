@@ -1,13 +1,13 @@
 #!/usr/bin/make -f
-
+SHELL := /bin/bash
 ###############################################################################
 ###                                Kurtosis                                 ###
 ###############################################################################
 
 # Installs Kurtosis if not already installed
 install-kurtosis:
-	@echo "Checking for Kurtosis installation..."
-	@if ! command -v kurtosis &> /dev/null; then \
+#	@echo "Checking for Kurtosis installation..."
+#	@if ! command -v kurtosis &> /dev/null; then \
 		echo "Kurtosis could not be found, installing..."; \
 		OS=$$(uname -s | tr A-Z a-z); \
 		if [ "$$OS" = "darwin" ]; then \
@@ -22,13 +22,13 @@ install-kurtosis:
 			tar -xzf kurtosis.tar.gz; \
 			rm kurtosis.tar.gz; \
 			chmod +x kurtosis; \
-			sudo mv kurtosis /usr/local/bin/; \
-		else \
-			echo "Unsupported OS $$OS for Kurtosis installation" && exit 1; \
-		fi; \
-	else \
-		echo "Kurtosis is already installed"; \
-	fi
+#			sudo mv kurtosis /usr/local/bin/; \
+#		else \
+#			echo "Unsupported OS $$OS for Kurtosis installation" && exit 1; \
+#		fi; \
+#	else \
+#		echo "Kurtosis is already installed"; \
+#	fi
 
 # Starts a Kurtosis enclave containing a local devnet.
 start-devnet: install-kurtosis

@@ -23,6 +23,7 @@ package cometbft
 import (
 	"context"
 	"fmt"
+	"time"
 
 	cmtabci "github.com/cometbft/cometbft/abci/types"
 	"github.com/sourcegraph/conc/iter"
@@ -32,7 +33,9 @@ func (s *Service[LoggerT]) finalizeBlock(
 	ctx context.Context,
 	req *cmtabci.FinalizeBlockRequest,
 ) (*cmtabci.FinalizeBlockResponse, error) {
+	startTime := time.Now()
 	res, err := s.finalizeBlockInternal(ctx, req)
+	s.logger.Info("finalizeBlock:", " startTime: ", startTime, " endTime: ", time.Now(), " elapsed time:", time.Since(startTime).Milliseconds())
 	if res != nil {
 		res.AppHash = s.workingHash()
 	}

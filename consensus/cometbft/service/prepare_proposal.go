@@ -70,6 +70,8 @@ func (s *Service[LoggerT]) prepareProposal(
 		s.prepareProposalState.Context(),
 		slotData,
 	)
+	s.logger.Info("prepareProposal:", "height", req.Height, " startTime: ", startTime, " endTime: ", time.Now(), " elapsed time:", time.Since(startTime).Milliseconds())
+
 	if err != nil {
 		s.logger.Error(
 			"failed to prepare proposal",

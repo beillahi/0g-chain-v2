@@ -24,6 +24,7 @@ package cometbft
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"cosmossdk.io/store/rootmulti"
 	cmtabci "github.com/cometbft/cometbft/abci/types"
@@ -32,6 +33,7 @@ import (
 func (s *Service[LoggerT]) commit(
 	context.Context, *cmtabci.CommitRequest,
 ) (*cmtabci.CommitResponse, error) {
+	startTime := time.Now()
 	if s.finalizeBlockState == nil {
 		// This is unexpected since CometBFT should call Commit only
 		// after FinalizeBlock has been called. Panic appeases nilaway.
@@ -47,6 +49,8 @@ func (s *Service[LoggerT]) commit(
 	s.sm.CommitMultiStore().Commit()
 
 	s.finalizeBlockState = nil
+
+	s.logger.Info("commit:", " startTime: ", startTime, " endTime: ", time.Now(), " elapsed time:", time.Since(startTime).Milliseconds())
 
 	return &cmtabci.CommitResponse{
 		RetainHeight: retainHeight,
