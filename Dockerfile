@@ -40,7 +40,7 @@ RUN apk add --no-cache git
 COPY ./go.mod ./go.sum ./
 RUN --mount=type=cache,target=/root/.cache/go-build \
     --mount=type=cache,target=/root/go/pkg/mod \
-    go mod download
+    go mod tidy
 
 #######################################################
 ###         Stage 2 - Build the Application         ###
