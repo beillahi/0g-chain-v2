@@ -34,10 +34,10 @@ const ( // appeases mnd
 	// These timeouts are the ones we tested are necessary
 	// at minimum to have a smooth network. We enforce that
 	// these minima are respected.
-	minTimeoutPropose   = 2000 * time.Millisecond
-	minTimeoutPrevote   = 2000 * time.Millisecond
-	minTimeoutPrecommit = 2000 * time.Millisecond
-	minTimeoutCommit    = 500 * time.Millisecond
+	minTimeoutPropose   = 200 * time.Millisecond
+	minTimeoutPrevote   = 200 * time.Millisecond
+	minTimeoutPrecommit = 200 * time.Millisecond
+	minTimeoutCommit    = 200 * time.Millisecond
 
 	maxBlockSize = 100 * 1024 * 1024
 
